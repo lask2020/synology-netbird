@@ -3,8 +3,14 @@
 # 定义实际执行的脚本路径
 REAL_SCRIPT="/var/packages/${SYNOPKG_PKGNAME}/scripts/real-start-stop-status"
 
-# 使用 spm-exe 提权执行 real-start-stop-status 脚本，并传递所有参数
-/usr/local/bin/spm-exec $REAL_SCRIPT $@
+# 检查spm-exec文件是否存在以及权限是否正确
+if [ ! -e /usr/local/bin/spm-exec ] || [ "$(stat -c "%U %G %a" /usr/local/bin/spm-exec)" != "root root 6755" ]; then
+    # 如果spm-exec不存在或者权限不正确，执行REAL_SCRIPT脚本
+    $REAL_SCRIPT $@
+else
+    # 使用 spm-exe 提权执行 real-start-stop-status 脚本，并传递所有参数
+    /usr/local/bin/spm-exec $REAL_SCRIPT $@
 
-# 获取执行结果，并退出
-exit $?
+    # 获取执行结果，并退出
+    exit $?
+fi
