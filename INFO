@@ -1,5 +1,5 @@
 package="Netbird"
-version="0.28.4"
+version="0.28.5"
 description="A WireGuard-based mesh network that connects your devices into a single private network. ⚠️本套件将以root权限运行！"
 
 arch="apollolake avoton braswell broadwell broadwellnk broadwellnkv2 broadwellntbap bromolow cedarview denverton epyc7002 geminilake grantley kvmx64 purley r1000 v1000"
@@ -11,4 +11,4 @@ os_min_ver="7.0-40000"
 displayname="Netbird"
 dsmappname="SYNO.SDS.Netbird"
 install_dep_packages="SimplePermissionManager"
-changelog="更新netbird到v0.28.4"
+changelog="更新netbird到v0.28.5"
