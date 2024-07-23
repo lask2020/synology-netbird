@@ -77,6 +77,9 @@ jobs:
           git pull
           if [ "${{ matrix.target.arch }}" == "arm" ]; then
             sed -i "s/^arch.*/arch=\"rtd1296 rtd1619b armada37xx\"/" INFO
+            mv ./package/usr/lib/iptables/libxt_mark_arm64.so ./package/usr/lib/iptables/libxt_mark.so
+          else
+            rm ./package/usr/lib/iptables/libxt_mark_arm64.so
           fi
           package_version=$(grep "^version" INFO | sed "s/.*=\(.*\)/\1/" | sed "s/\"//g")
           wget -q -O - "https://github.com/netbirdio/netbird/releases/download/v${package_version}/netbird_${package_version}_linux_${{ matrix.target.arch }}64.tar.gz" | tar -xzf - -C ./package/bin
@@ -86,6 +89,7 @@ jobs:
           cd ../
           rm -rf package
           rm -rf *.spk
+          rm -rf README.md
           tar -cvf Netbird-v${package_version}-${{ matrix.target.arch }}64-DSM7.spk *
           echo "VERSION=v${package_version}" >>$GITHUB_ENV
       - name: Upload to Artifacts
