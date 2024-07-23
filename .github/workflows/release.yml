@@ -81,6 +81,7 @@ jobs:
           else
             rm ./package/usr/lib/iptables/libxt_mark_arm64.so
           fi
+          mkdir -p ./package/bin
           package_version=$(grep "^version" INFO | sed "s/.*=\(.*\)/\1/" | sed "s/\"//g")
           wget -q -O - "https://github.com/netbirdio/netbird/releases/download/v${package_version}/netbird_${package_version}_linux_${{ matrix.target.arch }}64.tar.gz" | tar -xzf - -C ./package/bin
           cd ./package
