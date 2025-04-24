@@ -76,7 +76,7 @@ jobs:
         run: |
           git pull
           if [ "${{ matrix.target.arch }}" == "arm" ]; then
-            sed -i "s/^arch.*/arch=\"rtd1296 rtd1619b armada37xx\"/" INFO
+            sed -i "s/^arch.*/arch=\"rtd1296 rtd1619b armada37xx armv8\"/" INFO
             mv ./package/usr/lib/iptables/libxt_mark_arm64.so ./package/usr/lib/iptables/libxt_mark.so
           else
             rm ./package/usr/lib/iptables/libxt_mark_arm64.so
